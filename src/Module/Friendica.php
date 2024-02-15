@@ -30,7 +30,6 @@ use Friendica\Core\KeyValueStorage\Capability\IManageKeyValuePairs;
 use Friendica\Core\L10n;
 use Friendica\Core\Renderer;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
-use Friendica\Core\System;
 use Friendica\Database\PostUpdate;
 use Friendica\Model\User;
 use Friendica\Network\HTTPException;
@@ -124,8 +123,7 @@ class Friendica extends BaseModule
 			'friendica'				=> $this->t('Please visit <a href="https://friendi.ca">Friendi.ca</a> to learn more about the Friendica project.'),
 			'bugs'					=> $this->t('Bug reports and issues: please visit') . ' ' . '<a href="https://github.com/friendica/friendica/issues?state=open">' . $this->t('the bugtracker at github') . '</a>',
 			'info'					=> $this->t('Suggestions, praise, etc. - please email "info" at "friendi - dot - ca'),
-			'maximagesize'			=> $this->t('The maximum image size for this instance is set to' . ' ' . $this->config->get('system', 'maximagesize') . ' ' . 'bytes.' . ' Zero bytes means there is no limit.'),
-			'php_maxupload_size'	=> $this->t('The maximum PHP upload size is set to: ' . Strings::getBytesFromShorthand(ini_get('upload_max_filesize'))). ' ' . 'bytes.',
+			'uploadlimitations'		=> $this->t('The maximum image size for this instance is set to' . ' ' . $this->config->get('system', 'maximagesize') . ' ' . 'bytes.' . 'The maximum PHP upload size is set to: ' . Strings::getBytesFromShorthand(ini_get('upload_max_filesize')) . ' ' . 'bytes.'),
 
 			'visible_addons'		=> $addon,
 			'tos'					=> $tos,
@@ -189,20 +187,20 @@ class Friendica extends BaseModule
 		}
 
 		$data = [
-			'version'			=> App::VERSION,
-			'url'				=> (string)$this->baseUrl,
-			'addons'			=> $visible_addons,
-			'locked_features'	=> $locked_features,
-			'explicit_content'	=> intval($this->config->get('system', 'explicit_content', 0)),
-			'language'			=> $this->config->get('system', 'language'),
-			'register_policy'	=> $register_policy,
-			'admin'				=> $admin,
-			'site_name'			=> $this->config->get('config', 'sitename'),
-			'platform'			=> strtolower(App::PLATFORM),
-			'info'				=> $this->config->get('config', 'info'),
-			'maximagesize'		=> $this->config->get('system', 'maximagesize'),
-			'php_maxupload_size' => Strings::getBytesFromShorthand(ini_get('upload_max_filesize')),
-			'no_scrape_url'		=> $this->baseUrl . '/noscrape',
+			'version'				=> App::VERSION,
+			'url'					=> (string)$this->baseUrl,
+			'addons'				=> $visible_addons,
+			'locked_features'		=> $locked_features,
+			'explicit_content'		=> intval($this->config->get('system', 'explicit_content', 0)),
+			'language'				=> $this->config->get('system', 'language'),
+			'register_policy'		=> $register_policy,
+			'admin'					=> $admin,
+			'site_name'				=> $this->config->get('config', 'sitename'),
+			'platform'				=> strtolower(App::PLATFORM),
+			'info'					=> $this->config->get('config', 'info'),
+			'maximagesize'			=> $this->config->get('system', 'maximagesize'),
+			'php_maxupload_size'	=> Strings::getBytesFromShorthand(ini_get('upload_max_filesize')),
+			'no_scrape_url'			=> $this->baseUrl . '/noscrape',
 		];
 
 		$this->jsonExit($data);
