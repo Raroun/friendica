@@ -123,7 +123,8 @@ class Friendica extends BaseModule
 			'friendica'				=> $this->t('Please visit <a href="https://friendi.ca">Friendi.ca</a> to learn more about the Friendica project.'),
 			'bugs'					=> $this->t('Bug reports and issues: please visit') . ' ' . '<a href="https://github.com/friendica/friendica/issues?state=open">' . $this->t('the bugtracker at github') . '</a>',
 			'info'					=> $this->t('Suggestions, praise, etc. - please email "info" at "friendi - dot - ca'),
-			'uploadlimitations'		=> $this->t('The maximum image size for this instance is set to' . ' ' . $this->config->get('system', 'maximagesize') . ' ' . 'bytes.' . 'The maximum PHP upload size is set to: ' . Strings::getBytesFromShorthand(ini_get('upload_max_filesize')) . ' ' . 'bytes.'),
+			'maximagesize'			=> $this->t('The maximum image size for this instance is set to' . ' ' . $this->config->get('system', 'maximagesize') . ' ' . 'bytes.'),
+			'php_maxupload_size'	=> $this->t('The maximum PHP upload size is set to: ' . Strings::getBytesFromShorthand(ini_get('upload_max_filesize')) . ' ' . 'bytes.'),
 
 			'visible_addons'		=> $addon,
 			'tos'					=> $tos,
