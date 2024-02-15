@@ -115,14 +115,15 @@ class Friendica extends BaseModule
 		$tpl = Renderer::getMarkupTemplate('friendica.tpl');
 
 		return Renderer::replaceMacros($tpl, [
-			'about'     => $this->t('This is Friendica, version %s that is running at the web location %s. The database version is %s, the post update version is %s.',
-				'<strong>' . App::VERSION . '</strong>',
-				$this->baseUrl,
-				'<strong>' . $this->config->get('system', 'build') . '/' . DB_UPDATE_VERSION . '</strong>',
-				'<strong>' . $this->keyValue->get('post_update_version') . '/' . PostUpdate::VERSION . '</strong>'),
-			'friendica' => $this->t('Please visit <a href="https://friendi.ca">Friendi.ca</a> to learn more about the Friendica project.'),
-			'bugs'      => $this->t('Bug reports and issues: please visit') . ' ' . '<a href="https://github.com/friendica/friendica/issues?state=open">' . $this->t('the bugtracker at github') . '</a>',
-			'info'      => $this->t('Suggestions, praise, etc. - please email "info" at "friendi - dot - ca'),
+			'about'     	=> $this->t('This is Friendica, version %s that is running at the web location %s. The database version is %s, the post update version is %s.',
+							'<strong>' . App::VERSION . '</strong>',
+							$this->baseUrl,
+							'<strong>' . $this->config->get('system', 'build') . '/' . DB_UPDATE_VERSION . '</strong>',
+							'<strong>' . $this->keyValue->get('post_update_version') . '/' . PostUpdate::VERSION . '</strong>'),
+			'friendica' 	=> $this->t('Please visit <a href="https://friendi.ca">Friendi.ca</a> to learn more about the Friendica project.'),
+			'bugs'      	=> $this->t('Bug reports and issues: please visit') . ' ' . '<a href="https://github.com/friendica/friendica/issues?state=open">' . $this->t('the bugtracker at github') . '</a>',
+			'info'      	=> $this->t('Suggestions, praise, etc. - please email "info" at "friendi - dot - ca'),
+			'maximagesize'	=> $this->t('The maximum Image Size for this instance is set to %s.', $this->config->get('system', 'maximagesize'), ' 0 means there is no limitation',
 
 			'visible_addons' => $addon,
 			'tos'            => $tos,
@@ -186,18 +187,19 @@ class Friendica extends BaseModule
 		}
 
 		$data = [
-			'version'          => App::VERSION,
-			'url'              => (string)$this->baseUrl,
-			'addons'           => $visible_addons,
-			'locked_features'  => $locked_features,
-			'explicit_content' => intval($this->config->get('system', 'explicit_content', 0)),
-			'language'         => $this->config->get('system', 'language'),
-			'register_policy'  => $register_policy,
-			'admin'            => $admin,
-			'site_name'        => $this->config->get('config', 'sitename'),
-			'platform'         => strtolower(App::PLATFORM),
-			'info'             => $this->config->get('config', 'info'),
-			'no_scrape_url'    => $this->baseUrl . '/noscrape',
+			'version'			=> App::VERSION,
+			'url'				=> (string)$this->baseUrl,
+			'addons'			=> $visible_addons,
+			'locked_features'	=> $locked_features,
+			'explicit_content'	=> intval($this->config->get('system', 'explicit_content', 0)),
+			'language'			=> $this->config->get('system', 'language'),
+			'register_policy'	=> $register_policy,
+			'admin'				=> $admin,
+			'site_name'			=> $this->config->get('config', 'sitename'),
+			'platform'			=> strtolower(App::PLATFORM),
+			'info'				=> $this->config->get('config', 'info'),
+			'maximagesize'		=> $this->config->get('system', 'maximagesize'),
+			'no_scrape_url'		=> $this->baseUrl . '/noscrape',
 		];
 
 		$this->jsonExit($data);

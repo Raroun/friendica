@@ -4,6 +4,7 @@
 	<p>{{$friendica nofilter}}</p>
 	<p>{{$bugs nofilter}}</p>
 	<p>{{$info nofilter}}</p>
+	<p>{{$maximagesize nofilter}}</p>
 
 	<p>{{$visible_addons.title nofilter}}</p>
 {{if $visible_addons.list}}
