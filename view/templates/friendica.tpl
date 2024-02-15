@@ -5,6 +5,7 @@
 	<p>{{$bugs nofilter}}</p>
 	<p>{{$info nofilter}}</p>
 	<p>{{$maximagesize nofilter}}</p>
+	<p>{{$php_maxupload_size nofilter}}</p>
 
 	<p>{{$visible_addons.title nofilter}}</p>
 {{if $visible_addons.list}}

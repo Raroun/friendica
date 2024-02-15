@@ -36,6 +36,7 @@ use Friendica\Model\User;
 use Friendica\Network\HTTPException;
 use Friendica\Protocol\ActivityPub;
 use Friendica\Util\Profiler;
+use Friendica\Util\Strings;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -115,20 +116,21 @@ class Friendica extends BaseModule
 		$tpl = Renderer::getMarkupTemplate('friendica.tpl');
 
 		return Renderer::replaceMacros($tpl, [
-			'about'     	=> $this->t('This is Friendica, version %s that is running at the web location %s. The database version is %s, the post update version is %s.',
-							'<strong>' . App::VERSION . '</strong>',
-							$this->baseUrl,
-							'<strong>' . $this->config->get('system', 'build') . '/' . DB_UPDATE_VERSION . '</strong>',
-							'<strong>' . $this->keyValue->get('post_update_version') . '/' . PostUpdate::VERSION . '</strong>'),
-			'friendica' 	=> $this->t('Please visit <a href="https://friendi.ca">Friendi.ca</a> to learn more about the Friendica project.'),
-			'bugs'      	=> $this->t('Bug reports and issues: please visit') . ' ' . '<a href="https://github.com/friendica/friendica/issues?state=open">' . $this->t('the bugtracker at github') . '</a>',
-			'info'      	=> $this->t('Suggestions, praise, etc. - please email "info" at "friendi - dot - ca'),
-			'maximagesize'	=> $this->t('The maximum Image Size for this instance is set to %s.', $this->config->get('system', 'maximagesize'), ' 0 means there is no limitation',
+			'about'					=> $this->t('This is Friendica, version %s that is running at the web location %s. The database version is %s, the post update version is %s.',
+									'<strong>' . App::VERSION . '</strong>',
+									$this->baseUrl,
+									'<strong>' . $this->config->get('system', 'build') . '/' . DB_UPDATE_VERSION . '</strong>',
+									'<strong>' . $this->keyValue->get('post_update_version') . '/' . PostUpdate::VERSION . '</strong>'),
+			'friendica'				=> $this->t('Please visit <a href="https://friendi.ca">Friendi.ca</a> to learn more about the Friendica project.'),
+			'bugs'					=> $this->t('Bug reports and issues: please visit') . ' ' . '<a href="https://github.com/friendica/friendica/issues?state=open">' . $this->t('the bugtracker at github') . '</a>',
+			'info'					=> $this->t('Suggestions, praise, etc. - please email "info" at "friendi - dot - ca'),
+			'maximagesize'			=> $this->t('The maximum image size for this instance is set to' . ' ' . $this->config->get('system', 'maximagesize') . ' ' . 'bytes.' . ' Zero bytes means there is no limit.'),
+			'php_maxupload_size'	=> $this->t('The maximum PHP upload size is set to: ' . Strings::getBytesFromShorthand(ini_get('upload_max_filesize'))). ' ' . 'bytes.',
 
-			'visible_addons' => $addon,
-			'tos'            => $tos,
-			'block_list'     => $blocked,
-			'hooked'         => $hooked,
+			'visible_addons'		=> $addon,
+			'tos'					=> $tos,
+			'block_list'			=> $blocked,
+			'hooked'				=> $hooked,
 		]);
 	}
 
@@ -199,6 +201,7 @@ class Friendica extends BaseModule
 			'platform'			=> strtolower(App::PLATFORM),
 			'info'				=> $this->config->get('config', 'info'),
 			'maximagesize'		=> $this->config->get('system', 'maximagesize'),
+			'php_maxupload_size' => Strings::getBytesFromShorthand(ini_get('upload_max_filesize')),
 			'no_scrape_url'		=> $this->baseUrl . '/noscrape',
 		];
 
