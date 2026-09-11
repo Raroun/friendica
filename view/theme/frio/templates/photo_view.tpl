@@ -10,16 +10,17 @@
 <div id="live-photos"></div>
 
 <div id="photo-view-{{$id}}" class="generic-page-wrapper">
-	<div class="pull-left" id="photo-edit-link-wrap">
-		<a class="page-action faded-icon" id="photo-album-link" href="{{$album.0}}">
-			<i class="ri ri-folder-open-line"></i>
-			{{$album.1}}
-		</a>
-	</div>
-	<div class="pull-right" id="photo-edit-link-wrap">
+	<div class="photo-header-actions" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 15px; gap: 10px;">
+		<div id="photo-album-link-wrap">
+			<a class="page-action faded-icon" id="photo-album-link" href="{{$album.0}}" style="font-size: 1.1em; font-weight: bold;">
+				<i class="ri ri-folder-open-line"></i>
+				{{$album.1}}
+			</a>
+		</div>
+		<div id="photo-edit-link-wrap" style="display: flex; gap: 5px; flex-wrap: wrap; align-items: center;">
 {{if $tools}}
 	{{if $tools.view}}
-		<a id="photo-edit-link" class="btn btn-primary photo-back-link" href="{{$tools.view.0}}">
+		<a id="photo-view-link" class="btn btn-primary photo-back-link" href="{{$tools.view.0}}">
 			<i class="page-action ri ri-reply-line"></i>
 			 {{$back_text}}
 		</a>
@@ -49,13 +50,13 @@
 		</a>
 	{{/if}}
 	{{if $tools.lock}}
-		<a id="photo-lock-link" onclick="lockview(event, 'photo', {{$id}});" title="{{$tools.lock}}">
+		<a id="photo-lock-link" onclick="lockview(event, 'photo', {{$id}});" title="{{$tools.lock}}" style="margin-left: 10px;">
 			<i class="page-action ri ri-lg ri-lock-line faded-icon"></i>
 		</a>
 	{{/if}}
 {{/if}}
+		</div>
 	</div>
-	<div class="clear"></div>
 
 	<div id="photo-view-wrapper">
 		<div id="photo-photo" class="center-block">

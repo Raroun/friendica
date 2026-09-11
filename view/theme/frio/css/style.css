@@ -1280,10 +1280,6 @@ ul li .intro-wrapper button.intro-action-link {
 	margin-bottom: 15px;
 }
 
-#photo-edit-link-wrap .btn {
-	margin-bottom: 5px;
-}
-
 #newmember-tab > a {
 	font-size: 1.2em;
 	font-weight: 800;
@@ -3249,13 +3245,6 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 
 #photo-edit-submit-button {
 	margin-top: 15px;
-}
-
-.photo-back-link, #album-drop-link {
-	margin-right: 25px;
-}
-#photo-lock-link {
-	margin-left: 20px;
 }
 
 #photo-upload-collapse .row {
