@@ -3251,8 +3251,11 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 	margin-top: 15px;
 }
 
-#photo-toprofile-link, .photo-back-link, #album-drop-link {
+.photo-back-link, #album-drop-link {
 	margin-right: 25px;
+}
+#photo-lock-link {
+	margin-left: 20px;
 }
 
 #photo-upload-collapse .row {
