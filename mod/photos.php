@@ -670,7 +670,13 @@ function photos_content()
 				["`body` LIKE ? AND `author-id` = ?", '%' . $datum . '%', $author_id],
 				['order' => ['created' => true]]
 			);
-			$items = DBA::toArray($q);
+			$raw_items = DBA::toArray($q);
+			
+			$items = [];
+			foreach ($raw_items as $item) {
+				$items[$item['guid']] = $item;
+			}
+			$items = array_values($items);
 
 			$o = '<h3>' . DI::l10n()->t('Used in posts') . '</h3>';
 			if ($items) {
