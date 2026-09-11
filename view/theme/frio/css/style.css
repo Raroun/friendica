@@ -1280,6 +1280,10 @@ ul li .intro-wrapper button.intro-action-link {
 	margin-bottom: 15px;
 }
 
+#photo-edit-link-wrap .btn {
+	margin-bottom: 5px;
+}
+
 #newmember-tab > a {
 	font-size: 1.2em;
 	font-weight: 800;
