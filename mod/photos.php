@@ -663,9 +663,9 @@ function photos_content()
 
 		if ($cmd === 'usage') {
 			$q = DBA::p(
-				"SELECT `guid`, `title`, `created` FROM `item` WHERE `uid` = %d AND `wall` = 1 AND `deleted` = 0 AND `body` LIKE '%s'",
+				"SELECT `guid`, `title`, `created` FROM `item` WHERE `uid` = ? AND `wall` = 1 AND `deleted` = 0 AND `body` LIKE ?",
 				$owner_uid,
-				'%' . DBA::escape($datum) . '%'
+				'%' . $datum . '%'
 			);
 			$items = DBA::toArray($q);
 
