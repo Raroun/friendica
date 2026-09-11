@@ -42,6 +42,12 @@
 			{{$use_as_profile_picture_text}}
 		</a>
 	{{/if}}
+	{{if $tools.usage}}
+		<a id="photo-usage-link" class="btn btn-primary" href="{{$tools.usage.0}}">
+			<i class="page-action ri ri-links-line"></i>
+			{{$tools.usage.1}}
+		</a>
+	{{/if}}
 	{{if $tools.lock}}
 		<a id="photo-lock-link" onclick="lockview(event, 'photo', {{$id}});" title="{{$tools.lock}}">
 			<i class="page-action ri ri-lg ri-lock-line faded-icon"></i>
