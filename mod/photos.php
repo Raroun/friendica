@@ -678,7 +678,7 @@ function photos_content()
 			}
 			$items = array_values($items);
 
-			$o = '<h3>' . DI::l10n()->t('Used in posts') . '</h3>';
+			$o = '<h3>' . DI::l10n()->t('Usages') . '</h3>';
 			if ($items) {
 				$o .= '<ul style="list-style: none; padding-left: 0;">';
 				foreach ($items as $item) {
@@ -797,7 +797,7 @@ function photos_content()
 				$tools['edit']    = ['photos/' . $user['nickname'] . '/image/' . $datum . '/edit', DI::l10n()->t('Edit photo')];
 				$tools['delete']  = ['photos/' . $user['nickname'] . '/image/' . $datum . '/drop', DI::l10n()->t('Delete photo')];
 				$tools['profile'] = ['settings/profile/photo/crop/' . $ph[0]['resource-id'], DI::l10n()->t('Use as profile picture')];
-				$tools['usage']   = ['photos/' . $user['nickname'] . '/image/' . $datum . '/usage', DI::l10n()->t('Used in posts')];
+				$tools['usage']   = ['photos/' . $user['nickname'] . '/image/' . $datum . '/usage', DI::l10n()->t('Usages')];
 			}
 
 			if (
