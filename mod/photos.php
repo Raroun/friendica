@@ -662,10 +662,10 @@ function photos_content()
 		}
 
 		if ($cmd === 'usage') {
-			$q = DBA::p(
-				"SELECT `guid`, `title`, `created` FROM `item` WHERE `uid` = ? AND `wall` = 1 AND `deleted` = 0 AND `body` LIKE ?",
-				$owner_uid,
-				'%' . $datum . '%'
+			$q = \Friendica\Model\Post::selectForUser(
+				DI::userSession()->getLocalUserId(),
+				['guid', 'title', 'created'],
+				["`body` LIKE ?", '%' . $datum . '%']
 			);
 			$items = DBA::toArray($q);
 
