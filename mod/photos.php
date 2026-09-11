@@ -666,7 +666,7 @@ function photos_content()
 
 			$q = \Friendica\Model\Post::selectForUser(
 				DI::userSession()->getLocalUserId(),
-				['guid', 'title', 'created'],
+				['guid', 'title', 'created', 'body'],
 				["`body` LIKE ? AND `author-id` = ?", '%' . $datum . '%', $author_id],
 				['order' => ['created' => true]]
 			);
@@ -680,10 +680,20 @@ function photos_content()
 
 			$o = '<h3>' . DI::l10n()->t('Used in posts') . '</h3>';
 			if ($items) {
-				$o .= '<ul>';
+				$o .= '<ul style="list-style: none; padding-left: 0;">';
 				foreach ($items as $item) {
 					$title = $item['title'] ? $item['title'] : DI::l10n()->t('Post from') . ' ' . $item['created'];
-					$o .= '<li><a href="display/' . $item['guid'] . '">' . htmlspecialchars($title) . '</a></li>';
+					
+					$snippet = \Friendica\Content\Text\BBCode::toPlaintext($item['body'], false);
+					$snippet = trim(preg_replace('/\s+/', ' ', $snippet));
+					if (mb_strlen($snippet) > 150) {
+						$snippet = mb_substr($snippet, 0, 147) . '...';
+					}
+
+					$o .= '<li style="margin-bottom: 15px;">';
+					$o .= '<a href="display/' . $item['guid'] . '" style="font-weight: bold;">' . htmlspecialchars($title) . '</a><br>';
+					$o .= '<small style="color: #888; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' . htmlspecialchars($snippet) . '</small>';
+					$o .= '</li>';
 				}
 				$o .= '</ul>';
 			} else {
