@@ -661,6 +661,30 @@ function photos_content()
 			]);
 		}
 
+		if ($cmd === 'usage') {
+			$q = DBA::p(
+				"SELECT `guid`, `title`, `created` FROM `item` WHERE `uid` = %d AND `wall` = 1 AND `deleted` = 0 AND `body` LIKE '%s'",
+				$owner_uid,
+				'%' . DBA::escape($datum) . '%'
+			);
+			$items = DBA::toArray($q);
+
+			$o = '<h3>' . DI::l10n()->t('Used in posts') . '</h3>';
+			if ($items) {
+				$o .= '<ul>';
+				foreach ($items as $item) {
+					$title = $item['title'] ? $item['title'] : DI::l10n()->t('Post from') . ' ' . $item['created'];
+					$o .= '<li><a href="display/' . $item['guid'] . '">' . htmlspecialchars($title) . '</a></li>';
+				}
+				$o .= '</ul>';
+			} else {
+				$o .= '<p>' . DI::l10n()->t('No related posts found.') . '</p>';
+			}
+			$o .= '<p><a href="photos/' . $user['nickname'] . '/image/' . $datum . '">' . DI::l10n()->t('Back to photo') . '</a></p>';
+
+			return $o;
+		}
+
 		$prevlink = '';
 		$nextlink = '';
 
@@ -754,6 +778,7 @@ function photos_content()
 				$tools['edit']    = ['photos/' . $user['nickname'] . '/image/' . $datum . '/edit', DI::l10n()->t('Edit photo')];
 				$tools['delete']  = ['photos/' . $user['nickname'] . '/image/' . $datum . '/drop', DI::l10n()->t('Delete photo')];
 				$tools['profile'] = ['settings/profile/photo/crop/' . $ph[0]['resource-id'], DI::l10n()->t('Use as profile picture')];
+				$tools['usage']   = ['photos/' . $user['nickname'] . '/image/' . $datum . '/usage', DI::l10n()->t('Used in posts')];
 			}
 
 			if (
