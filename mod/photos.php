@@ -662,10 +662,13 @@ function photos_content()
 		}
 
 		if ($cmd === 'usage') {
+			$author_id = \Friendica\Model\Contact::getPublicIdByUserId($owner_uid);
+
 			$q = \Friendica\Model\Post::selectForUser(
 				DI::userSession()->getLocalUserId(),
 				['guid', 'title', 'created'],
-				["`body` LIKE ?", '%' . $datum . '%']
+				["`body` LIKE ? AND `author-id` = ?", '%' . $datum . '%', $author_id],
+				['order' => ['created' => true]]
 			);
 			$items = DBA::toArray($q);
 
