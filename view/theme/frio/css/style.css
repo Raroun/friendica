@@ -787,12 +787,6 @@ button#main-menu {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
-		scrollbar-width: none; /* Firefox */
-}
-#topbar-first-nav-container::-webkit-scrollbar {
-		display: none; /* Safari and Chrome */
 }
 #topbar-first .navbar-toggle {
 	margin: 0;
